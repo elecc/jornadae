@@ -1,0 +1,57 @@
+.nav_menu_pink {
+    float: left;
+    background: #EF2D84;
+    border-bottom: 1px solid #D9DEE4;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.nav_menu_cp {
+    float: left;
+    /*009ED6
+    hover 0178a3
+    naranjas:
+    d65600
+    border-color: #c24e00;
+    hover:
+    
+    * */
+    background: #009ED6;
+    border-bottom: 1px solid #D9DEE4;
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
+.white{
+	color: #ffffff;
+}
+
+.nav.navbar-nav>li>a {
+     color: #ffffff !important; 
+}
+
+.top_nav .nav>li>a:focus, .top_nav .nav>li>a:hover, .top_nav .nav .open>a, .top_nav .nav .open>a:focus, .top_nav .nav .open>a:hover {
+    background: #E5007E;
+}
+
+.nav.side-menu>li.current-page, .nav.side-menu>li.active {
+    border-right: 5px solid #EF2D84;
+}
+
+.nav-sm .nav.child_menu li.active, .nav-sm .nav.side-menu li.active-sm {
+    border-right: 5px solid #EF2D84;
+}
+
+pre.prettyprint {
+   border: 1px solid #ccc;
+   margin-bottom: 0;
+   padding: 9.5px;
+}
+
+.flexigrid tr.erow td {
+    background: #FBEFF5;
+    border-bottom: 1px solid #FBEFF5;
+}
+

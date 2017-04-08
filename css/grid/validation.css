@@ -1,0 +1,21 @@
+form.cmxform {
+		width: 50em;
+}
+em.error {
+	background:url("images/unchecked.gif") no-repeat 0px 0px;
+	padding-left: 16px;
+}
+em.success {
+	background:url("images/checked.gif") no-repeat 0px 0px;
+	padding-left: 16px;
+}
+form.cmxform label.error {
+	margin-left: auto;
+	width: 250px;
+}
+em.error {
+	color: black;
+}
+#warning {
+	display: none;
+}
