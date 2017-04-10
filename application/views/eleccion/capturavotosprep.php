@@ -33,7 +33,7 @@
 
 		<!-- BOTON QUE MUESTRA / OCULTA "POP NUEVA ELECCION -->
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pop_je">
-			Agregar Votos conteo rápido
+			Agregar Votos PREP
 		</button>
 
 		<!-- Modal -->
@@ -45,7 +45,7 @@
 						<button type="button" class="close btn-success" data-dismiss="modal">
 							&times;
 						</button>
-						<h5 class="modal-title">Captura de votos conteo rápido</h5>
+						<h5 class="modal-title">Captura de votos PREP</h5>
 						<hr />
 						<div class="col-md-6 col-sm-6 col-xs-6">
 						<address>
@@ -74,17 +74,65 @@
 							  <input type="text" class="form-control" placeholder="No. de casilla" aria-describedby="sizing-addon3">
 							</div>
 							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
 							<div class="input-group input-group-sm">
 							  <span class="input-group-addon" id="sizing-addon3">Partido 1:</span>
 							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
 							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
 							<div class="input-group input-group-sm">
 							  <span class="input-group-addon" id="sizing-addon3">Partido 2:</span>
 							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
 							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
 							<div class="input-group input-group-sm">
 							  <span class="input-group-addon" id="sizing-addon3">Partido 3:</span>
 							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 4:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 5:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 6:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 7:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 8:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 9:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-6 col-xs-6">
+							<div class="input-group input-group-sm">
+							  <span class="input-group-addon" id="sizing-addon3">Partido 10:</span>
+							  <input type="text" class="form-control" placeholder="Votos" aria-describedby="sizing-addon3">
+							</div>
 							</div>
 						</form>
 					</div>

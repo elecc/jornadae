@@ -33,7 +33,7 @@
 
 		<!-- BOTON QUE MUESTRA / OCULTA "POP NUEVA ELECCION -->
 		<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#pop_je">
-			Agregar Votos de elección
+			Agregar Votos requeridos de elección
 		</button>
 
 		<!-- Modal -->

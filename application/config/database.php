@@ -73,13 +73,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
- 
-
- //CONFIGURACION MAQUINA DE CHARLYS
  $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=orcl)))',
-	'username' => 'system',
+	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=ORCL)))',
+	'username' => 'SYSTEM',
 	'password' => 'Vlunasev7',
 	'database' => 'orcl',
 	'dbdriver' => 'oci8',

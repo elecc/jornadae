@@ -28,7 +28,7 @@ class Casillas extends Template_controller {
 		$config['sTitle'] = 'Tipos de dato';
 		
 		$config['db']['username'] = 'SYSTEM';
-		$config['db']['password'] = 'finanzas';
+		$config['db']['password'] = 'Vlunasev7';
 		$config['db']['connection_string'] = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=orcl)))';
 		$config['db']['dbdriver'] = 'oci8';
 		
