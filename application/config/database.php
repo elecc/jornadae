@@ -73,11 +73,37 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+//CONFIGURACION DE LA COMPU DE PIT 
+/*$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=jornadae)))',
+	'username' => 'SYSTEM',
+	'password' => 'adminDB',
+	'database' => 'jornadae',
+	'dbdriver' => 'oci8',
+	'dbprefix' => 'SYSTEM',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+ */
+ 
+//CONFIGURACION MAQUINA DE CHARLYS
+/*
  $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=ORCL)))',
+	'hostname' => '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SID=orcl)))',
 	'username' => 'SYSTEM',
-	'password' => 'Vlunasev7',
+	'password' => 'finanzas',
 	'database' => 'orcl',
 	'dbdriver' => 'oci8',
 	'dbprefix' => 'SYSTEM',
@@ -94,9 +120,53 @@ $query_builder = TRUE;
 	'failover' => array(),
 	'save_queries' => TRUE
 );
+*/
+/*
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => '52.39.179.163',
+	'username' => 'jornadae',
+	'password' => 'Jornadae.Admin',
+	'database' => 'jornadaeleccion',
+	'dbdriver' => 'postgre',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+ */
+
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'postgres',
+	'password' => 'postgresql',
+	'database' => 'postgres',
+	'dbdriver' => 'postgre',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+); 
  
- 
-  
 /*
 $db['default'] = array(
 	'dsn'	=> '',

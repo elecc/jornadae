@@ -35,6 +35,9 @@
 	
 	<link href="<?php echo base_url('css/build/css/custom_sf.css')?>" rel="stylesheet">
 	
+	<!-- CSS NOTIFICACIONES ANIMATE -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/animate/animate.css')?>" />
+	
 	<script type="text/javascript" src="<?php echo base_url('js/grid/jquery/jquery-1.8.0.min.js')?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/jquery/dist/jquery-ui.min.js')?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/grid/jquery.validate.js')?>"></script>
@@ -51,6 +54,12 @@
 	<script type="text/javascript" src="<?php echo base_url('js/bootstrapdatetime/moment-with-locales.min.js')?>"></script>
 	<script type="text/javascript" src="<?php echo base_url('js/bootstrapdatetime/bootstrap-datetimepicker.min.js')?>"></script>
 	
+	<!-- MODAL.JS BOOTSTRAP -->
+	<script type="text/javascript" src="<?php echo base_url('js/bootstrap/js/modal.js')?>"></script>
+	
+	<!-- JS NOTIFICACIONES ANIMATE -->
+	<script type="text/javascript" src="<?php echo base_url('js/notify/bootstrap-notify.min.js')?>"></script>
+	
 	<!-- Scripts para mapas CartoDB-->
     <script type="text/javascript" src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
     <script src="<?php echo base_url('js/cartodb/cdmxCarto.js')?>"></script>
@@ -62,7 +71,8 @@
     
     <!-- Scripts para mapas CartoDB-->
 
-
+	<!-- FUINCIONES GENERALES -->
+	<script type="text/javascript" src="<?php echo base_url('js/funciones/funciones.js')?>"></script>
 
 
 </head>

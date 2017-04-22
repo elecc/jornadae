@@ -498,12 +498,9 @@ class Model_engine  extends Model_engine_sql{
         }
     
         $this->order($Vjp5wagudo4u);
-        
-		//echo $Vnrp4bokkm35; 
-		    
+            
         $this->select($Vnrp4bokkm35);
-		
-		    
+    
         $Vyd4lo23gpo4 = $this->gResult();
     
         
@@ -531,9 +528,9 @@ class Model_engine  extends Model_engine_sql{
     
             
         $V4wv2msaalsw = $this->DB->query($Vpoae2jcihwa);
-        
+
 		if(is_array($V4wv2msaalsw)){
-			$V4wv2msaalsw = $V4wv2msaalsw[0]['COUNT'];
+			$V4wv2msaalsw = $V4wv2msaalsw[0]['count'];
             $Vi0oyq1lze1pTotal = $V4wv2msaalsw;
 		}else{
 			$V4wv2msaalsw = 0;
@@ -648,7 +645,7 @@ class Model_engine  extends Model_engine_sql{
             if(isset($this->TABLE_NAME['general']['PRIMARY_KEY'])){
                 foreach ($this->TABLE_NAME['general']['PRIMARY_KEY'] as $Vt4jmd4a4vxq => $Vllne4ankrll){
                     $Vt4jmd4a4vxq = $this->gNameColumn($Vt4jmd4a4vxq);
-                    if(isset($Vi0oyq1lze1pValue[$Vt4jmd4a4vxq])){
+					if(isset($Vi0oyq1lze1pValue[$Vt4jmd4a4vxq])){
                         $Vi0oyq1lze1pnput = new Model_input();
                         $Vi0oyq1lze1pnput->setType('hidden');
                         $Vi0oyq1lze1pnput->setName($Vt4jmd4a4vxq);
@@ -768,13 +765,13 @@ class Model_engine  extends Model_engine_sql{
 		$Vpoae2jcihwa = $_SESSION[$Vt4jmd4a4vxq];
 
 		$Vpoae2jcihwa = $this->rewriteQuery($Vpoae2jcihwa);
-
-		$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+		
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 
 		$Vzt1vytatydb = $Vle3ldyht4v2->query_field_name($Vpoae2jcihwa);
 		
 		$Vle3ldyht4v2->__destruct();   
-		   
+
 		foreach ($this->ARRAYCOLUMNS as $Vt4jmd4a4vxq => $Vllne4ankrllC){
 			if(!$Vllne4ankrllC->is_hidden)
 			if(in_array($Vllne4ankrllC->alias, $Vzt1vytatydb)){
@@ -980,7 +977,7 @@ class Model_engine  extends Model_engine_sql{
 			
 		$this->setColumns($Vyd4lo23gpo4);
 
-		$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 
       	$V02e1o2znvm2 = query_to_export($Vle3ldyht4v2,$Vpoae2jcihwa,TRUE,$this->ARRAYCOLUMNS,$Vx21w2sesbf5);
 		
@@ -1075,7 +1072,7 @@ class Model_engine  extends Model_engine_sql{
 			
 		$this->setColumns($Vyd4lo23gpo4);
 
-		$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 
       	$V0fxvrz0tqh0 = query_to_export($Vle3ldyht4v2,$Vpoae2jcihwa,TRUE,$this->ARRAYCOLUMNS,$Vx21w2sesbf5);
 		
@@ -1098,7 +1095,7 @@ class Model_engine  extends Model_engine_sql{
     }
     
     public function rewriteQuery($Vpoae2jcihwa){
-    	$Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa) WHERE rn=0";
+    	$Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa) as q".rand(0,1000)." WHERE rn=0 ";
     	return $Vpoae2jcihwa;
     }
     
@@ -1214,23 +1211,20 @@ class Model_engine  extends Model_engine_sql{
         
         foreach ($Vpd3il5r2gom as $Vt4jmd4a4vxq => $Vllne4ankrll){
         	$V2yvhydjw5pv = $this->gNameColumn($Vt4jmd4a4vxq);
-        	if(isset($Vx21w2sesbf5[$V2yvhydjw5pv])){
+	    	if(isset($Vx21w2sesbf5[$V2yvhydjw5pv])){
         		$Vzsp3u2i1ejg = str_replace('-','.',$Vt4jmd4a4vxq);
         		$Vx21w2sesbf5Key[$Vzsp3u2i1ejg] = $Vx21w2sesbf5[$V2yvhydjw5pv];
         	}
         }
-        
         
 
         $this->select($Vx21w2sesbf5Key);
          
         $Vyd4lo23gpo4 = $this->gResult();
          
-        
-         
         $Vpoae2jcihwa = $Vyd4lo23gpo4['general']['select'];
 
-		$Vle3ldyht4v2 = new Model_engine_db($this->CONFIG_DB);
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($this->CONFIG_DB);
 
         $Vi0oyq1lze1pData = $Vle3ldyht4v2->query($Vpoae2jcihwa);
 		
@@ -1294,7 +1288,7 @@ class Model_engine  extends Model_engine_sql{
 
     	if(!$this->ERRORSQL){
     		
-			$Vle3ldyht4v2 = new Model_engine_db($this->CONFIG_DB);
+			$Vle3ldyht4v2 = new Model_engine_db_pgsql($this->CONFIG_DB);
 			
 			foreach ($this->TABLE_NAME as $Vllne4ankrllT){
 		    	if(isset($Vllne4ankrllT['insert'])){
@@ -1326,7 +1320,7 @@ class Model_engine  extends Model_engine_sql{
 							$this->ERROR_CODE[] = sprintf(GRIDA000000010,$Vle3ldyht4v2->infoDB->message);
 						}
 					}else{
-		    			$this->ERRORSQL = true;
+						$this->ERRORSQL = true;
 		    			$this->ERROR_CODE[] = sprintf(GRIDA000000004,$this->TITLE);
 		    		}
 					
@@ -1393,7 +1387,7 @@ class Model_engine  extends Model_engine_sql{
     	
     	if(!$this->ERRORSQL){
     	
-	    	$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+	    	$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 			
 			foreach ($this->TABLE_NAME as $Vllne4ankrllT){
 	    		if(isset($Vllne4ankrllT['update'])){
@@ -1500,7 +1494,7 @@ class Model_engine  extends Model_engine_sql{
     	 
     	if(!$this->ERRORSQL){
     	
-	    	$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+	    	$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 	    	 
 	    	foreach (array_reverse($this->TABLE_NAME) as $Vllne4ankrllT){
 	    		if(isset($Vllne4ankrllT['delete'])){
@@ -2094,7 +2088,7 @@ class Model_engine  extends Model_engine_sql{
     
     
     private function fSelect($Vpoae2jcihwa,$Vt4jmd4a4vxq){
-    	$Vle3ldyht4v2 = new Model_engine_db($this->CONFIG_DB);
+    	$Vle3ldyht4v2 = new Model_engine_db_pgsql($this->CONFIG_DB);
 		$Vi0oyq1lze1pData = $Vle3ldyht4v2->query($Vpoae2jcihwa.' ORDER BY '.$Vt4jmd4a4vxq);
 		$Vle3ldyht4v2->__destruct();
         return $Vi0oyq1lze1pData;
@@ -2105,7 +2099,7 @@ class Model_engine  extends Model_engine_sql{
     private function cfSelect($Vpoae2jcihwa,$Vt4jmd4a4vxq){
         if(strpos($Vpoae2jcihwa,'=')!== false){
             $Vpoae2jcihwa = str_replace('=', ' NOT IN ', $Vpoae2jcihwa);
-			$Vle3ldyht4v2 = new Model_engine_db($this->CONFIG_DB);
+			$Vle3ldyht4v2 = new Model_engine_db_pgsql($this->CONFIG_DB);
 	        $Vi0oyq1lze1pData = $Vle3ldyht4v2->query($Vpoae2jcihwa.' ORDER BY '.$Vt4jmd4a4vxq);
 			$Vle3ldyht4v2->__destruct();
             return $Vi0oyq1lze1pData;
@@ -2404,7 +2398,7 @@ class Model_engine  extends Model_engine_sql{
 		 
 		$this->setColumns($Vyd4lo23gpo4);
 	
-		$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 		$Vi0oyq1lze1pData = $Vle3ldyht4v2->query($Vpoae2jcihwa);
 		$Vle3ldyht4v2->__destruct();
 		
@@ -2499,7 +2493,7 @@ class Model_engine  extends Model_engine_sql{
 		 
 		$this->setColumns($Vyd4lo23gpo4);
 		
-		$Vle3ldyht4v2 = new Model_engine_db($Vcekyiohn0i4);
+		$Vle3ldyht4v2 = new Model_engine_db_pgsql($Vcekyiohn0i4);
 		$Vi0oyq1lze1pData = $Vle3ldyht4v2->query($Vpoae2jcihwa);
 		$Vle3ldyht4v2->__destruct();
 		

@@ -10,6 +10,9 @@
     <meta name="author" content="">
 
     <title>Administrador de Jornada Electoral</title>
+    
+    <!--BASE URL -->
+    <input type="hidden" name="baseUrl" id="baseUrl" value="<?php echo base_url();?>">
 
 	<link href="<?php echo base_url('css/bootstrap/dist/css/bootstrap.min.css')?>" rel="stylesheet">
 	<link href="<?php echo base_url('css/font-awesome/css/font-awesome.min.css')?>" rel="stylesheet">
@@ -26,6 +29,8 @@
 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/grid/prettify.css')?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/grid/tomorrow-night-blue.css')?>" />
+	<!-- CSS NOTIFICACIONES ANIMATE -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('css/animate/animate.css')?>" />
 	
 </head>
 
@@ -97,7 +102,7 @@
             		  
             		
             		 <div class="col-lg-8" >
-                    	<!-- <form action="<?php echo cryptURL(array('model'=>'model_acceso/model_acceso','function'=>'acceso')) ?>" method="post"> -->
+            		 	<!--
                     		<form action="<?php echo ACCESO_PRINCIPAL_APLICACION?>" method="post">
 	                        <div class="table-responsive centerBlock bord">
 	                        <table class="table centerBlock" style="width:90%;">
@@ -137,13 +142,61 @@
 	                          </tr>
 	                          <tr>
 	                            <td colspan="2">
-	                                <!-- <button type="submit" class="btn btn-primary pink">ENTRAR</button> -->
 	                                <button type="submit" class="btn btn-primary ">ENTRAR</button>
 	                            </td>
 	                          </tr>
 	                        </table>
 	                        </div>
 	                    </form>
+	                   -->
+	                    <!--------------------------------------------------------------------------------------------->
+	                    <form id="login" name="login">
+	                        <div class="table-responsive centerBlock bord">
+	                        <table class="table centerBlock" style="width:90%;">
+	                          
+	                             <td colspan="2">
+	                                <h4>Ingresa tu Usuario y Contraseña</h4>
+	                            </td>
+	                          </tr>
+	                          
+	                          <tr>
+	                            <td><label for="usr">Usuario:</label></td>
+	                            <td><input type="text" name="usr" class="form-control" id="usr"></td> 
+	                          </tr>
+	                           <tr>	                            
+	                            <td colspan="2"> <?php echo form_error('usr'); ?></td>
+	                           </tr>
+	                          <tr>
+	                            <td><label for="pwd">Contrase&ntilde;a:</label></td>
+	                            <td> <input type="password" name="pass" class="form-control" id="pass"></td> 
+	                          </tr>
+	                           <tr>	                            
+	                            <td colspan="2"> <?php echo form_error('pwd'); ?></td>
+	                           </tr>
+	                          <tr>
+	                          <tr>
+	                            <td><label for="pwd">Correo:</label></td>
+	                            <td> <input type="email" name="correo" class="form-control" id="correo" disabled=""></td> 
+	                          </tr>
+	                           <tr>	                            
+	                            <td colspan="2"> <?php echo form_error('correo'); ?></td>
+	                           </tr>
+	                          <tr>
+	                          	<td colspan="2">
+	                                <div class="pinkText"><?php if(isset($error)){echo $mensaje;}?></div>
+	                               
+	                            </td>
+	                          </tr>
+	                          <tr>
+	                            <td colspan="2">
+	                                <!-- <button type="submit" class="btn btn-primary pink">ENTRAR</button> -->
+	                                <button type="text" role="button" id="botonLogin" class="btn btn-primary ">ENTRAR</button>
+	                            </td>
+	                          </tr>
+	                        </table>
+	                        </div>
+	                    </form>
+	                    <!--------------------------------------------------------------------------------------------->
 				    </div>
 
 					<div class="col-lg-2" >
@@ -197,6 +250,16 @@
     <script src="<?php echo base_url('js/inicio_full_page/wow.min.js')?>"></script>
     <script src="<?php echo base_url('js/inicio_full_page/creative.js')?>"></script>
     <script src="<?php echo base_url('js/inicio_full_page/cbpAnimatedHeader.min.js')?>"></script>
+    
+    <!-- JS NOTIFICACIONES ANIMATE -->
+	<script type="text/javascript" src="<?php echo base_url('js/notify/bootstrap-notify.min.js')?>"></script>
+    
+    <!-- FUINCIONES GENERALES -->
+	<script type="text/javascript" src="<?php echo base_url('js/funciones/funciones.js')?>"></script>
+    
+    <!-- CONTROLA LOGIN -->
+    <script src="<?php echo base_url("js/login/login.js") ?>"></script>
+    <!-- FIN DE CXONTROLA LOGIN -->
    <!--
    <script type="text/javascript" src="<?php echo base_url('js/grid/run_prettify.js')?>"></script>
    -->

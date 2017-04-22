@@ -1695,7 +1695,7 @@ function _setClippingPath($clx, $cly, $clw, $clh) {
 	$s .= sprintf('%.3F %.3F l ', ($clx+$clw)*_MPDFK, ($this->h-($cly))*_MPDFK);	// line to TR
 	$s .= sprintf('%.3F %.3F l ', ($clx)*_MPDFK, ($this->h-($cly))*_MPDFK);	// line to TL
 	$s .= ' W n ';	// Ends path no-op & Sets the clipping path
-	return $s;
+	return $s;
 }
 
 
@@ -6219,7 +6219,7 @@ if (!$table_draft) {
 					$stringWidth = 0;
 				}
 				else {
-					$stringWidth = $this->objectbuffer[$k]['OUTER-WIDTH'];
+					$stringWidth = $this->objectbuffer[$k]['OUTER-WIDTH'];
 				}
 			}
 
@@ -19430,7 +19430,7 @@ function _tableHeight(&$table){
 				// if ['hr'] for any of the others is also 0, then abort (too complicated)
 				if ($k != $i && $heightrow[$k]==0) { break(1); }
 				// check again that top and bottom are not crossed by rowspans - or abort (too complicated)
-				if ($k==$top) {
+				if ($k==$top) {
 					// ???? take account of colspan as well???
 					for( $m = 0 ; $m < $numcols ; $m++ ) { //columns
 						if (!isset($cells[$k][$m]) || $cells[$k][$m]==0) {

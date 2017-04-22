@@ -4,9 +4,6 @@
 	$data_user = $_SESSION['data_user'.md5(base_url())];
 	$nombre = $data_user->usuario->nombre;	
 	//valores temporales
-	$nombre = "ADMINISTADOR";
-	
-	
 ?>
 
 <div class="container body">
@@ -25,7 +22,9 @@
 	              </div>
 	              <div class="profile_info">
 	                <span>Usuario:</span>
-	                <h2><?php echo $nombre?></h2><br />
+	                <h2><?php echo $this->session->userdata['ss_login']?></h2>
+	                <span>Perfil:</span>
+	                <h2><?php echo $this->session->userdata['ss_perfil']?></h2>
 	              </div>
 	            </div>
 

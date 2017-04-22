@@ -15,7 +15,7 @@ define("GRID_DISPLAY","DISPLAY");
 define("GRID_HIDE_COLUMN","HIDE_COLUMN");
 define("GRID_HIDDEN","HIDDEN");
 define("GRID_MAX_LENGTH","MAX_LENGTH");
-define("GRID","GD");
+define("GRID","gd");
 define("GRID_OR"," OR ");
 define("GRID_IN"," IN ");
 define("GRID_BETWEEN"," BETWEEN ");

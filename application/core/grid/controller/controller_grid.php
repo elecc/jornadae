@@ -34,6 +34,7 @@ Mexico DF
 
 require_once APPPATH .'libraries/gridLib/lib/class.constants_helper.php';
 require_once APPPATH .'libraries/gridLib/lib/class.model_engine_db.php';
+require_once APPPATH .'libraries/gridLib/lib/class.model_engine_db_pgsql.php';
 require_once APPPATH .'libraries/gridLib/lib/class.model_engine.php';
 require_once APPPATH .'libraries/gridLib/lib/class.cripto_helper.php';
 
@@ -56,7 +57,6 @@ class Controller_grid extends CI_Controller{
 		$this->PATH = $path;
 	}
 	
-	//PARA LINUX
 	public function gPath(){
 		$path = explode('controllers/',$this->PATH);
 		if(count($path) > 1){$path = $path[1];}
@@ -65,12 +65,6 @@ class Controller_grid extends CI_Controller{
 		return $path;
 	}
 	
-	//PARA WINDOWS
-	/*public function gPath(){
-		$path = explode('controllers/',$this->PATH);
-		return $path;
-	}
-	*/
 	
 	/**
 	 * Build Model_engine
@@ -81,12 +75,12 @@ class Controller_grid extends CI_Controller{
 		if(isset($config['db'])){
 				if(isset($config['table']) && is_array($config['table'])){
 						 if(isset($config['sPath'])){
-								$db = new Model_engine_db($config['db']);
+								$db = new Model_engine_db_pgsql($config['db']);
 								if(is_bool($db->connected) && $db->connected){
 			
 									$eS = new Model_engine();
 									$eS->sDB($db);
-								 	$eS->sPATH('cgenerales/'.$config['sPath']);
+								 	$eS->sPATH($config['sPath']);
 									$eS->sConfig_DB($config['db']);
 									if(isset($config['sIdTable']))	$eS->sIdTable($config['sIdTable']);
 									if(isset($config['server_rute']))	$eS->sSERVERRUTE($config['server_rute']);

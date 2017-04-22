@@ -1,88 +1,74 @@
 $(document).ready(function(){
+    	
+	var $newJe = $('#add_je');
+	var $btnJe = $('#btn_je');
 	
-	//VALORES PARA AJUSTAR EL POP
-	var pxHeight = document.body.clientHeight;
-	var pxWidth = document.body.clientWidth;
-	var $newJe = $('#agregar_je a');
-	
-	/***********************************************************************************************************************************************/	
-	//CAMBIO DE COLORES
-	$(document).on("mouseenter", ".fa,#add", function(){
-		//$(this).addClass('activo2');
+	//LIMPIAMOS FORMULARIO EN CUANTO ABRA EL MODAL
+	$btnJe.on('click',function(){
+		//LIMPIAMOS TODOS LOS CAMPOS
+		$('#descripcion_je,#fecha_je,#id_estado_je,#mensajes').val('');
+		$('#mensajes').hide();
 	});
 	
-	$(document).on("mouseleave",  ".fa,#add", function(){
-		//$(this).removeClass('activo2');
-	});
-	/***********************************************************************************************************************************************/
+	//PREPARAMOS LOS DATAPICKERS
+	$( "#fecha_je" ).datepicker({			//ID DE LOS CAMPOS A LOS CUALES SE HARA DATEPICKER
+		changeMonth: true,
+		changeYear: true,
+		//yearRange: "2012:2018"			//EJEMPLO DE RESTRICCION DEL SEXENIO
+		//minDate: -20, 					//EJEMPLO DE RESTRICCION -20 DIAS
+		//maxDate: "+1M +10D" 			//EJEMPLO DE RESTRICCION 1 MES + 10 DIAS
+		//minDate: "-36M", 					//EJEMPLO DE RESTRICCION 3 AÑOS ATRAS
+		//maxDate: "+36M"						//EJEMPLO DE RESTRICCION 3 AÑOS ADELANTE
+    });
+	$( "#fecha_je" ).datepicker( "option", "showAnim", 'slide');			//OPCION DE ANIMACION (EFECTO) DEL CALENDARIO
+	$( "#fecha_je" ).datepicker( "option", "dateFormat", 'dd/mm/yy' );		//FORMATO DEL CALENDARIO
+	
 	$newJe.on('click',function(){
-		//validaSesion();				//VALIDA SESION, VIENE DE FUNCIONALIDAD.JS
 		
-		var url_je = $('#baseUrl').val()+'je/je/pop_je';
+		var descripcionJe = $('#descripcion_je').val();
+		var fechaJe = $('#fecha_je').val();
+		var idEstadoJe = $('#id_estado_je').val();
 		
-		$("#nueva_je2").load(url_je);			//CONTROLADOR QUE LLEVA A LA VISTA "FORMULARIO JORNADA ELECTORAL"
+		//VALIDAMOS FORMULARIO
+		if(descripcionJe == ""){
+			$('#mensajes').html('Ingrese la descripción de la Jornada Electoral').show();
+			return false;
+		}else if(fechaJe == ""){
+			$('#mensajes').html('Ingrese la fecha de la Jornada Electoral').show();
+			return false;
+		}else if(idEstadoJe == ""){
+			$('#mensajes').html('Ingrese Estado').show();
+			return false;
+		}else{
+			$('#mensajes').html('').hide();
+		}		
 		
-		$(function() {
-			//$('div[aria-describedby="nuevo_proyecto"]').css("z-index",100000);
-			$("#nueva_je").dialog({
-				autoOpen: true,
-				resizable: true,
-				show: {
-			    	effect: "blind",
-					duration: 300
-				},
-			    hide: {
-			    effect: "clip",
-			    duration: 300
-			    },
-				//height: pxHeight*.5,
-				width: pxWidth*.50,
-				modal: false,
-				buttons: {
-					"Agregar Jornada Electoral": function() {
-						
-						//VALIDACIONES EN PLANTILLA ANTERIOR
-						//var formProject = "proyecto_publico";
-						//if(validaFormPop(formProject)){}else{return false;}
-						
-						//NOS LLEVAMOS LOS DATOS DEL FORMULARIO
-						//var datos = $("#proyecto_publico").serializeArray();
-						
-						//PREPARAMOS LA INSERCION A LA BD
-						/*
-				        var url = $("#baseUrl").val()+'je/je/insertar_je';
-				        
-				        var petichon = $.ajax({
-				            type: "POST",
-				            dataType: 'json',
-				            url: url,
-				            data: datos
-				        });
-				        
-				        petichon.done(function(respuesta){
-				    		if(respuesta.codigo == 666){
-				    				activaZonaMensaje('error',respuesta.mensaje);
-							}else if(respuesta.codigo > 0){
-									var link = $('#baseUrl').val()+'publicos/seguimiento';
-									var refresca_proyectos = $('#baseUrl').val()+'publicos/administra_proyecto/tabla_proyectos';
-									var complemento = '<br><br><a style="font-weight:bold; color:#FF3300;" href="'+link+'">'+		
-													  'Ha sido completado el paso 1 "Agregar Datos iniciales del proyecto" para continuar con el registro presione aquí</a>';
-					    			activaZonaMensaje('correcto',respuesta.mensaje+complemento);
-					    			$('#principal').load(refresca_proyectos);
-							}else if(respuesta.codigo < 0){
-								activaZonaMensaje('error',respuesta.mensaje);
-							}else{
-								activaZonaMensaje('error',respuesta.mensaje);
-							}
-						});
-						$( this ).dialog( "close" );
-						*/
-						
-					}
-		      	}			//BUTTONS
-		    });			//DIALOG
-		});			//FUNCION
+		//NOS LLEVAMOS LOS DATOS DEL FORMULARIO
+		var datos = $("#form_je").serializeArray();
 		
+		//PREPARAMOS LA INSERCION A LA BD
+	    var insert_je = $("#baseUrl").val()+'je/je/insertar_je';
+	    
+	    var petichon = $.ajax({
+	        type: "POST",
+	        dataType: 'json',
+	        url: insert_je,
+	        data: datos
+	    });
+	    
+	    petichon.done(function(res){
+			if(res.codigo>0){
+				var url_refresca = $('#baseUrl').val()+'je/je/refresca_je';			//PARA REFRESCAR POR AJAX LA TABLA JE
+				$.post(url_refresca, function(data){
+				  $('#tabla_je').html( data );
+				});
+				
+				mostrarMensaje('correcto',res.mensaje);
+			}else{
+				mostrarMensaje('error',res.mensaje);
+			}
+		});
+	    
+	    
 	});
-	/***********************************************************************************************************************************************/
-});				//general*/
+});

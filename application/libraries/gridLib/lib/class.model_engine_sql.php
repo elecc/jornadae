@@ -70,18 +70,23 @@ class Model_engine_sql extends Model_engine_properties {
             $Vpbjjqqjjrkd = explode('.', $Vjwxu22tuzdn);
             $Vk3t1crw0vdp = $Vpbjjqqjjrkd[0];
             $Vjwxu22tuzdn = $Vpbjjqqjjrkd[1];
-            $Vyd4lo23gpo4 = $this->DB->query("SELECT * FROM ALL_TABLES WHERE OWNER='$Vk3t1crw0vdp' AND upper(table_name) = '$Vjwxu22tuzdn'");
+			$Vyd4lo23gpo4 = $this->DB->query("SELECT EXISTS(SELECT * FROM information_schema.tables WHERE table_schema = '$Vk3t1crw0vdp' AND   table_name = '$Vjwxu22tuzdn')");    
         }else{
-            $Vyd4lo23gpo4 = $this->DB->query("SELECT * FROM ALL_TABLES WHERE upper(table_name) = '$Vjwxu22tuzdn'");
+           	$Vyd4lo23gpo4 = $this->DB->query("SELECT EXISTS(SELECT * FROM information_schema.tables WHERE table_name = '$Vjwxu22tuzdn')");   
         }
+		
 		
 		if(is_array($Vyd4lo23gpo4)){
 			if(!empty($Vyd4lo23gpo4)){
-				return true;
-			}
-		}else{
+					if($Vyd4lo23gpo4[0]['exists'] == 't')
+						return true;
+					else 
+						return false;
+			}else
+				return false;
+		}else
 			return false;
-		}
+		
 		
       
     }
@@ -102,11 +107,88 @@ class Model_engine_sql extends Model_engine_properties {
             $Vk3t1crw0vdp = $Vpbjjqqjjrkd[0];
             $Vjwxu22tuzdn = $Vpbjjqqjjrkd[1];
             $Vllne4ankrllT['TABLE_NAME'] = $Vjwxu22tuzdn;
-            $Vyd4lo23gpo4 = $this->DB->query("SELECT  * FROM  all_tab_columns WHERE  upper(table_name) = '$Vjwxu22tuzdn' AND OWNER = '$Vk3t1crw0vdp' ORDER BY COLUMN_ID");
+			
+			$query='SELECT
+						pg_namespace.nspname::varchar as "OWNER", 
+						pg_class.relname::varchar as "TABLE_NAME",
+						pg_attribute.attname::varchar as "COLUMN_NAME", 
+						CASE WHEN pg_type.typname::varchar ilike \'int%\'    THEN \'NUMBER\'
+						     WHEN pg_type.typname::varchar ilike \'float%\'  THEN \'NUMBER\'
+						     WHEN pg_type.typname::varchar = \'bool\'    THEN \'BOOLEAN\'
+						     WHEN pg_type.typname::varchar = \'varchar\' THEN \'VARCHAR2\'
+						     WHEN pg_type.typname::varchar = \'date\'    THEN \'DATE\'
+						     WHEN pg_type.typname::varchar ilike \'time%\'   THEN \'TIMESTAMP\'
+						     WHEN pg_type.typname::varchar = \'bytea\'   THEN \'BLOB\'
+						     WHEN pg_type.typname::varchar = \'bpchar\'  THEN \'CHAR\'
+						END as "DATA_TYPE",
+						NULL as "DATA_TYPE_MOD",
+						NULL as "DATA_TYPE_OWNER", 
+						pg_attribute.atttypmod + 30 as "DATA_LENGTH",
+						NULL as "DATA_PRECISION",
+						CASE WHEN pg_type.typname::varchar = \'int4\'    THEN 0
+						     ELSE  NULL
+						END as "DATA_SCALE",
+						CASE WHEN pg_attribute.attnotnull is TRUE THEN \'N\'
+						     ELSE \'Y\'
+						END
+						as "NULLABLE",
+						NULL as "DEFAULT_LENGTH", 
+						NULL as "DATA_DEFAULT", 
+						pg_attribute.attnum as "COLUMN_ID"
+					FROM pg_attribute, pg_class, pg_type, pg_namespace
+					WHERE 
+						attrelid = pg_class.oid 
+						AND pg_attribute.attisdropped = False 
+						AND pg_class.relname = \''.$Vjwxu22tuzdn.'\'
+						AND attnum > 0  
+						AND atttypid = pg_type.oid
+						AND pg_namespace.oid = pg_class.relnamespace
+						AND pg_namespace.nspname = \''.$Vk3t1crw0vdp.'\'';
+			
+			$Vyd4lo23gpo4 = $this->DB->query($query);
+			
         }else{
-            $Vyd4lo23gpo4 = $this->DB->query("SELECT  * FROM  all_tab_columns WHERE  upper(table_name) = '$Vjwxu22tuzdn' ORDER BY COLUMN_ID");
+            
+            $query='SELECT
+						pg_namespace.nspname::varchar as "OWNER", 
+						pg_class.relname::varchar as "TABLE_NAME",
+						pg_attribute.attname::varchar as "COLUMN_NAME", 
+						CASE WHEN pg_type.typname::varchar ilike \'int%\'    THEN \'NUMBER\'
+						     WHEN pg_type.typname::varchar ilike \'float%\'  THEN \'NUMBER\'
+						     WHEN pg_type.typname::varchar = \'bool\'    THEN \'BOOLEAN\'
+						     WHEN pg_type.typname::varchar = \'varchar\' THEN \'VARCHAR2\'
+						     WHEN pg_type.typname::varchar = \'date\'    THEN \'DATE\'
+						     WHEN pg_type.typname::varchar ilike \'time%\'   THEN \'TIMESTAMP\'
+						     WHEN pg_type.typname::varchar = \'bytea\'   THEN \'BLOB\'
+						     WHEN pg_type.typname::varchar = \'bpchar\'  THEN \'CHAR\'
+						END as "DATA_TYPE",
+						NULL as "DATA_TYPE_MOD",
+						NULL as "DATA_TYPE_OWNER", 
+						pg_attribute.atttypmod + 30 as "DATA_LENGTH",
+						NULL as "DATA_PRECISION",
+						CASE WHEN pg_type.typname::varchar = \'int4\'    THEN 0
+						     ELSE  NULL
+						END as "DATA_SCALE",
+						CASE WHEN pg_attribute.attnotnull is TRUE THEN \'N\'
+						     ELSE \'Y\'
+						END
+						as "NULLABLE",
+						NULL as "DEFAULT_LENGTH", 
+						NULL as "DATA_DEFAULT", 
+						pg_attribute.attnum as "COLUMN_ID"
+					FROM pg_attribute, pg_class, pg_type, pg_namespace
+					WHERE 
+						attrelid = pg_class.oid 
+						AND pg_attribute.attisdropped = False 
+						AND pg_class.relname = \''.$Vjwxu22tuzdn.'\'
+						AND attnum > 0  
+						AND atttypid = pg_type.oid
+						AND pg_namespace.oid = pg_class.relnamespace
+						AND pg_namespace.nspname = \'public\'';
+            $Vyd4lo23gpo4 = $this->DB->query($query);
         }
   
+  	
     	if(is_array($Vyd4lo23gpo4)){
     		
 			if(!empty($Vyd4lo23gpo4)){
@@ -163,20 +245,39 @@ class Model_engine_sql extends Model_engine_properties {
         if(count($Vjwxu22tuzdn_name) > 1){
             $Vk3t1crw0vdp = $Vjwxu22tuzdn_name[0];
             $Vjwxu22tuzdn_name = $Vjwxu22tuzdn_name[1];
-            $Vpoae2jcihwa = "SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner,cons.constraint_type ".
-                    "FROM all_constraints cons, all_cons_columns cols ".
-                    "WHERE cons.constraint_name = cols.constraint_name ".
-                    "AND cons.owner = cols.owner AND cols.table_name='".$Vjwxu22tuzdn_name."' AND COLS.OWNER='".$Vk3t1crw0vdp."' ".
-                    "ORDER BY cols.table_name, cols.position";
-    
-            
+           
+			$Vpoae2jcihwa = 'SELECT pg_class.relname as "TABLE_NAME",kcu.column_name as "COLUMN_NAME",kcu.ordinal_position as "POSITION",\'ENABLED\' as "STATUS",
+					       pg_namespace.nspname as "OWNER", 
+					       CASE WHEN pg_constraint.contype = \'p\' THEN \'P\'
+					            WHEN pg_constraint.contype = \'f\' THEN \'R\' 
+					       END as "CONSTRAINT_TYPE"
+					  from pg_constraint, pg_namespace, pg_class, pg_attribute, information_schema.table_constraints istc, information_schema.key_column_usage kcu
+					  where
+						   pg_constraint.conname = kcu.constraint_name and
+						   pg_constraint.conname = istc.constraint_name and
+						   pg_namespace.nspname = \''.$Vk3t1crw0vdp.'\' 
+						   and pg_namespace.oid = pg_constraint.connamespace
+						   and pg_class.relname = \''.$Vjwxu22tuzdn_name.'\'
+						   and pg_class.oid = pg_constraint.conrelid
+						   and pg_constraint.conindid = pg_attribute.attrelid';		
+						    
         }else{
             $Vjwxu22tuzdn_name = $Vjwxu22tuzdn_name[0];
-            $Vpoae2jcihwa = "SELECT cols.table_name, cols.column_name, cols.position, cons.status, cons.owner,cons.constraint_type ".
-                    "FROM all_constraints cons, all_cons_columns cols ".
-                    "WHERE cons.constraint_name = cols.constraint_name ".
-                    "AND cons.owner = cols.owner AND cols.table_name='".$Vjwxu22tuzdn_name."' ".
-                    "ORDER BY cols.table_name, cols.position";
+           
+			$Vpoae2jcihwa = 'SELECT pg_class.relname as "TABLE_NAME",kcu.column_name as "COLUMN_NAME",kcu.ordinal_position as "POSITION",\'ENABLED\' as "STATUS",
+					       pg_namespace.nspname as "OWNER", 
+					       CASE WHEN pg_constraint.contype = \'p\' THEN \'P\'
+					            WHEN pg_constraint.contype = \'f\' THEN \'R\' 
+					       END as "CONSTRAINT_TYPE"
+					  from pg_constraint, pg_namespace, pg_class, pg_attribute, information_schema.table_constraints istc, information_schema.key_column_usage kcu
+					  where
+						   pg_constraint.conname = kcu.constraint_name and
+						   pg_constraint.conname = istc.constraint_name and
+						   pg_namespace.nspname = \'public\' 
+						   and pg_namespace.oid = pg_constraint.connamespace
+						   and pg_class.relname = \''.$Vjwxu22tuzdn_name.'\'
+						   and pg_class.oid = pg_constraint.conrelid
+						   and pg_constraint.conindid = pg_attribute.attrelid';
         }
         
         $Vdruamuofwxp = $this->DB->query($Vpoae2jcihwa);
@@ -315,6 +416,7 @@ class Model_engine_sql extends Model_engine_properties {
         	$Vpoae2jcihwa = "SELECT ".$Vdb1adanyczz.",count(*) over() cnt,row_number() over(order by 1) rn  FROM ".$Vllne4ankrllT['OWNER'].'.'.$Vllne4ankrllT['TABLE_NAME'].$Vhw3ckeeacck;
         }
         
+		
         $Vllne4ankrllT['select'] = $Vpoae2jcihwa;
         $Vpoae2jcihwa = "SELECT  count(*) as COUNT FROM ".$Vllne4ankrllT['TABLE_NAME'].$Vhw3ckeeacck;
         $Vllne4ankrllT['count'] = $Vpoae2jcihwa;
@@ -520,9 +622,9 @@ class Model_engine_sql extends Model_engine_properties {
         if((isset($this->MAX_ROWS) && strlen($this->MAX_ROWS)>0 ) && (isset($this->MIN_ROWS) && strlen($this->MIN_ROWS)>0)){
             $V0ebfx4tgmxj = $this->MIN_ROWS;
             $Vei5gufzpbmd = $this->MAX_ROWS;
-            $Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa) WHERE rn BETWEEN $V0ebfx4tgmxj AND $Vei5gufzpbmd";
+            $Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa) as q".rand(0,1000)." WHERE rn BETWEEN $V0ebfx4tgmxj AND $Vei5gufzpbmd";
         }else{
-            $Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa)";
+            $Vpoae2jcihwa = "SELECT *FROM ($Vpoae2jcihwa) as q".rand(0,1000);
         }
          
         return $Vpoae2jcihwa;
@@ -651,7 +753,7 @@ class Model_engine_sql extends Model_engine_properties {
     
     
     public function gNameColumn($Vllne4ankrllP){
-        $Vdqytxgovylt = GRID.strtoupper(substr(hash("sha256",$Vllne4ankrllP), 0, 28));
+        $Vdqytxgovylt = GRID.(substr(hash("sha256",$Vllne4ankrllP), 0, 28));
         return $Vdqytxgovylt;
     }
     
@@ -769,7 +871,7 @@ class Model_engine_sql extends Model_engine_properties {
     		$Vdb1adanyczz = "";
     		$Vllne4ankrlls = "";
     		foreach ($Vllne4ankrllT['COLUMNS'] as $Vllne4ankrllC){
-    			$Vt4jmd4a4vxq = $Vllne4ankrllC->owner.'.'.$Vllne4ankrllC->table_name.'.'.$Vllne4ankrllC->name;
+    			$Vt4jmd4a4vxq = $Vllne4ankrllC->name;
     			if(isset($Vllne4ankrllC->value) && strpos($Vllne4ankrllC->type, 'BLOB')!==FALSE){
     				$Vdb1adanyczz.= $Vt4jmd4a4vxq.",";
     				$Vllne4ankrlls.= "utl_raw.cast_to_raw(".$Vllne4ankrllC->value."),";
@@ -805,11 +907,12 @@ class Model_engine_sql extends Model_engine_properties {
     
     		foreach ($Vllne4ankrllT['COLUMNS'] as $Vllne4ankrllC){
     			$Vt4jmd4a4vxq = $Vllne4ankrllC->owner.'.'.$Vllne4ankrllC->table_name.'.'.$Vllne4ankrllC->name;
+
     			if(isset($Vllne4ankrllC->value) && (!isset($Vllne4ankrllT['PRIMARY_KEY'][$Vt4jmd4a4vxq]))){
     				if(strpos($Vllne4ankrllC->type, 'BLOB')!==FALSE){
-    					$Vllne4ankrlls.=$Vt4jmd4a4vxq."=utl_raw.cast_to_raw(".$Vllne4ankrllC->value."),";
+    					$Vllne4ankrlls.=$Vllne4ankrllC->name."=utl_raw.cast_to_raw(".$Vllne4ankrllC->value."),";
     				}else{
-    					$Vllne4ankrlls.=$Vt4jmd4a4vxq."=".$Vllne4ankrllC->value.",";
+    					$Vllne4ankrlls.=$Vllne4ankrllC->name."=".$Vllne4ankrllC->value.",";
     				}
     			}else if (isset($Vllne4ankrllT['PRIMARY_KEY'][$Vt4jmd4a4vxq])){
     				$Vhw3ckeeacck.=$Vt4jmd4a4vxq."=".$Vllne4ankrllC->value." AND ";

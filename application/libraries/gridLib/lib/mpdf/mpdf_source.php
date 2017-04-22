@@ -1536,7 +1536,7 @@ function ResetMargins() {
 		$this->bMargin=$this->orig_lMargin;
 	    }
 	    else {	// ODD	// OR NOT MIRRORING MARGINS/FOOTERS
-		$this->tMargin=$this->orig_lMargin;
+		$this->tMargin=$this->orig_lMargin;
 		$this->bMargin=$this->orig_rMargin;
 	    }
 	   $this->lMargin=$this->DeflMargin;
@@ -3866,7 +3866,7 @@ function WriteText($x,$y,$txt) {
 	if ($this->text_input_as_HTML) {
 		$txt = $this->all_entities_to_utf8($txt);
 	}
-	if ($this->usingCoreFont) { $txt = mb_convert_encoding($txt,$this->mb_enc,'UTF-8'); }
+	if ($this->usingCoreFont) { $txt = mb_convert_encoding($txt,$this->mb_enc,'UTF-8'); }
 
 	// DIRECTIONALITY
 	if (preg_match("/([".$this->pregRTLchars."])/u", $txt)) { $this->biDirectional = true; }	// *OTL*
